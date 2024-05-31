@@ -1,0 +1,277 @@
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+% \geometry{a4paper,top=3cm,bottom=3cm,left=3.5cm,right=3.5cm}% heightrounded,bindingoffset=5mm}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{longtable}
+\usepackage{textcomp}
+
+
+\begin{document}
+
+    Guidolin Giacomo - IN0501058 \\
+
+
+    \textbf{BASI DI DATI - Registro per studiare uno strumento}\\
+
+    \section{PROGETTAZIONE CONCETTUALE }
+
+    \subsection{Analisi dei requisiti}
+
+    Si vuole creare una base di dati per aiutare dei musicisti nel loro percorso di studio di un brano.\\
+    I vari brani che verrano inseriti nel database possederanno un nome, un autore e avranno la possibilità di essere associati ad informazioni quali l'editore specifico dello spartito,
+    l'anno di publicazione e un link per trovarne la copia online. Presenteranno anche, se possibile, dei commenti per facilitarne l'approccio stilistico al momento dello studio e una serie
+    di link che rimandino a dei video su youtube per poter ascoltare altri interpreti del brano.\\
+    Gli utenti della base di dati potranno, una volta cominciato lo studio, segnarsi, sulle battute che stanno approcciando, la velocità di esecuzione e eventuali commenti sulla sezione.\\
+    L'utente dovrà essere in grado, se desidera di ricavare informazioni sull'autore per poter al meglio interpretare il brano.\\
+    Il compositore del pezzo infatti, oltre al nome, potrà avere informazioni quali la data di nascita, la eventuale data di morte e la corrente artistica cui fa parte. Se necessario sarà anche
+    possibile avere una sezione commenti per poter anche qui descrivere informazioni stilistiche tipiche del dato autore.\\
+    Anche il il movimento artistico, cui fa parte l'autore, presenterà alcune info quali il nome, le caratteristiche tecniche-stilistiche che la rendono una corrente a se stante,
+    e se necessario il range di anni su cui si sviluppò  maggiormente.
+    \\Al movimento aggiungiamo anche notizie storiche, sotto forma di eventi decisivi per lo sviluppo della corrente, che potranno essere registrati tramite nome e anno di appartenenza.
+    \\In ultimo richiediamo di aggiungere una lista di strumenti musicali che saranno di tipi diversi e di case produttrici differenti dei quali l'utente ne possederà almeno uno. Questo, al
+    momento dell'iscrizione, dovrà fornire dati utili quali il nome, la data di nascita e l'anno di inizio del suo percorso musicale.\\
+
+    \subsection{Glossario dei termini}
+
+
+    \begin{tabular}{l p{5cm} l p{2cm} l l}
+        \toprule
+        \textbf{\textit{Termine}} & \textbf{\textit{Descrizione}} & \textbf{\textit{Sinonimi}} & \textbf{\textit{Collegamenti}} \\
+        \midrule
+        Autore & Colui che ha prodotto un opera artistica. & Compositore & Brano, \newline Movimento \\
+        \midrule
+        Brano & Parte più o meno estesa di una composizione musicale. & Spartito, \newline  Pezzo  & Autore, \newline Utente, \newline Url, \newline Battuta \\
+        \midrule
+        Battuta & Unità di tempo rappresentata sulla partitura tramite uno spazio compreso tra due stanghette. & Sezione & Utente, \newline Brano \\
+        \midrule
+        Movimento & Insieme di regole stilistiche e tecniche che riguardano un periodo artistico & Corrente & Autore, \newline Eventi \\
+        \bottomrule
+    \end{tabular}
+
+    \subsection{Suddivisione del testo in frasi omogenee}
+
+    \subsubsection{Frasi di carattere generale}
+
+    Si vuole creare una base di dati per aiutare dei musicisti nel loro percorso di studio di un brano.\\
+
+    \subsubsection{Frasi relative al brano}
+
+    I vari brani che verrano inseriti nel database possederanno un nome, un autore e avranno la possibilità di essere associati ad informazioni quali l'editore specifico dello spartito,
+    l'anno di publicazione e un link per trovarne la copia online. Presenteranno anche, se possibile, dei commenti per facilitarne l'approccio stilistico al momento dello studio e una serie
+    di link che rimandino a dei video su youtube per poter ascoltare altri interpreti del brano.\\ \\
+    L'utente dovrà essere in grado, se desidera di ricavare informazioni sull'autore per poter al meglio interpretare il brano.\\
+
+
+    \subsubsection{Frasi relative alle battute}
+
+    Gli utenti della base di dati potranno, una volta cominciato lo studio, segnarsi, sulle battute che stanno approcciando, la velocità di esecuzione e eventuali commenti sulla sezione.\\
+
+    \subsubsection{Frasi relative all'autore}
+
+    L'utente dovrà essere in grado, se desidera di ricavare informazioni sull'autore per poter al meglio interpretare il brano.\\
+    Il compositore del pezzo infatti, oltre al nome, potrà avere informazioni quali la data di nascita, la eventuale data di morte e la corrente artistica cui fa parte. Se necessario sarà anche
+    possibile avere una sezione commenti per poter anche qui descrivere informazioni stilistiche tipiche del dato autore.\\ \\
+    Anche il il movimento artistico, cui fa parte l'autore [\dots]\\
+
+    \subsubsection{Frasi relative al movimento}
+
+    Anche il il movimento artistico, cui fa parte l'autore, presenterà alcune info quali il nome, le caratteristiche tecniche-stilistiche che la rendono una corrente a se stante,
+    e se necessario il range di anni su cui si sviluppò  maggiormente.\\ \\
+    Al movimento aggiungiamo anche notizie storiche[\dots]\\
+
+    \subsubsection{Frasi relative agli eventi}
+
+    Al movimento aggiungiamo anche notizie storiche, sotto forma di eventi decisivi per lo sviluppo della corrente, che potranno essere registrati tramite nome e anno di appartenenza.
+
+    \subsubsection{Frasi relative agli strumenti}
+
+    In ultimo richiediamo di aggiungere una lista di strumenti musicali che saranno di tipi diversi e di case produttrici differenti dei quali l'utente ne possederà almeno uno.
+
+    \subsubsection{Frasi relative all'utente}
+
+    [\dots]dei quali l'utente ne possederà almeno uno. Questo, al
+    momento dell'iscrizione, dovrà fornire dati utili quali il nome, la data di nascita e l'anno di inizio del suo percorso musicale.\\
+
+    \subsection{Dizionario delle entità}
+
+    \begin{tabular}{l p{5cm} p{3cm} p{2cm} l l l}
+        \toprule
+        \textbf{\textit{Entità}} & \textbf{\textit{Descrizione}} & \textbf{\textit{Attributi}} & \textbf{\textit{Identificatore}} \\
+        \midrule
+        Strumento & Oggetto in grado di emettere suoni. Viene utilizzato per fare musica. & Produttore, \newline Tipo, \newline ID & ID \\
+        \midrule
+        Utente & Il musicista che usufruisce della base di dati. & ID, \newline Nome, \newline Nascita, \newline Inizio & ID \\
+        \midrule
+        Brano & Parte più o meno estesa di una composizione musicale. & Nome, \newline Editore, \newline Anno, \newline Copia, \newline Commento, \newline ID & ID \\
+        \midrule
+        Battuta & Unità di tempo rappresentata sulla partitura tramite uno spazio compreso tra due stanghette & ID, \newline Numero, \newline Btm, \newline Commento & ID \\
+        \midrule
+        Url & Link riguradante un video youtube relativo al brano & ID, \newline Brano, \newline Link & ID \\
+        \midrule
+        Autore & Colui che ha prodotto un opera artistica & Nascita, \newline Morte, \newline Commento,  \newline Nome, \newline ID & ID \\
+        \midrule
+        Movimento & Corrente artistica & Range, \newline Caratteristiche, \newline Nome & Nome \\
+        \midrule
+        Evento & Evento che merita di essere tramandato per la sua importanza & Anno, \newline Nome & Nome \\
+        \bottomrule
+    \end{tabular}
+
+    \subsection{Dizionario delle relazioni}
+
+    \begin{tabular}{l p{5cm} p{3cm} p{2cm} l l l}
+        \toprule
+        \textbf{\textit{Relazioni}} & \textbf{\textit{Descrizione}} & \textbf{\textit{Componenti}} & \textbf{\textit{Attributi}} \\
+        \midrule
+        Possesso & Lo strumento è proprietà di un utente & Strumento, \newline Utente & \\
+        \midrule
+        Raccoglitore & Insieme di brani che un utente può o ha già studiato & Utente, \newline Brano & \\
+        \midrule
+        Studio & L'utente elebora in modo dettagliato e personale un brano al fine di riuscire a suonarlo & Battuta, \newline  Brano, \newline Utente & Stato \\
+        \midrule
+        Esempio & Rappresentazione artistica di un interprete del brano, utile per comprendere al meglio quest'ultimo & Brano, \newline URL & \\
+        \midrule
+        Compositore & Artista che produce un opera musicale & Brano, \newline Autore & \\
+        \midrule
+        Stile & Caratteristiche tecnico artistche riguradanti l'interpretazione storicamente accurata & Autore, \newline Movimento \\
+        \midrule
+        Influenza & Un movimento artistico viene definito dagli eventi storici accaduti durante il suo tempo & Movimento, \newline Evento & \\
+        \bottomrule
+    \end{tabular}
+
+    \newpage
+
+    \subsection{Modello ER}
+
+    Coerentemente con quanto appena detto, si giunge alla formulazione del seguente modello entità-relazione:
+
+    \begin{center}
+        \includegraphics[width=\linewidth]{immagini/01_diagrammaER.png}   % [width=0.8\linewidth, height=0.4\textheight]{immagini/01_diagrammaER.jpg}
+    \end{center}
+
+    \subsection{Vincoli non esprimibili}
+
+    \begin{itemize}
+        \item L'anno di nascita dell'autore non può essere maggiore dell'anno attuale
+        \item L'anno di nascita dell'utente non può essere maggiore dell'anno attuale
+        \item L'utente non può avere più di 120 anni
+        \item Il range del movimento non può includere anni futuri
+        \item Gli eventi devono essersi svolti nel passato
+        \item Non possono essere presenti battute se non è iniziato lo studio
+    \end{itemize}
+
+    \section{PROGGETTAZIONE LOGICA}
+
+    \subsection{Tavola dei volumi}
+
+    \begin{center}
+        \begin{tabular}{lll}
+            \toprule
+            \textbf{\textit{Concetto}} & \textbf{\textit{Tipo}} & \textbf{\textit{Volume}}\\
+            \midrule
+            Strumento & Entità & 150\\
+            \midrule
+            Possesso & Relazione & 150\\
+            \midrule
+            Utente & Entità & 100\\
+            \midrule
+            Raccoglitore & Relazione & 500\\
+            \midrule
+            Brano &  Entità & 500\\
+            \midrule
+            Studio & Relazione & 250000\\
+            \midrule
+            Battuta &  Entità & 250000\\
+            \midrule
+            Esempio & Relazione & 750\\
+            \midrule
+            Url &  Entità & 750\\
+            \midrule
+            Compositore & Relazione & 500\\
+            \midrule
+            Autore &  Entità & 30\\
+            \midrule
+            Stile & Relazione & 30\\
+            \midrule
+            Movimento &  Entità & 10\\
+            \midrule
+            Influenza & Relazione & 200\\
+            \midrule
+            Evento &  Entità & 200\\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+
+    \subsection{Valutazione del costo}
+
+    \begin{center}
+        \begin{tabular}{ p {5cm} lll}
+            \toprule
+            \textbf{\textit{Operazione}} & \textbf{\textit{Tipo}} & \textbf{\textit{Frequenza}} \\
+            \midrule
+
+            \bottomrule
+        \end{tabular}
+    \end{center}
+
+    \subsection{Ristrutturazione modello E-R}
+
+    \subsubsection{Eliminazione delle generalizzazioni}
+
+    Nel diagramma entità-relazioni proposto ci sono due casi di generalizzazioni. In entrambi i casi la soluzione più ragionevole è l'accorpamento delle entità figlie in quella padre.
+    \newline Si aggiungono quindi all'entità \textit{iscritti} 3 nuovi valori: "\textit{ELO}", "\textit{Titolo}" e "\textit{Docente}". Questi attributi possono assumere valore "NULL", e questo ha un preciso significato. In particolare:
+    \newline  ELO NULL $ \Rightarrow $ Iscritto "amatore"
+    \newline  ELO NOT NULL $ \Rightarrow $ Iscritto "agonista"
+    \newline  Docente NULL $ \Rightarrow $ Iscritto "giocatore"
+    \newline  Docente NOT NULL $ \Rightarrow $ Iscritto "studente"
+
+
+    Facendo questa operazione si crea due nuovi vincoli non esprimibili dal grafico del modello E-R: un iscritto per poter essere coinvolto nella relazione \textit{prestazione} deve possedere un attributo ELO diverso dal valore NULL. Similmente un iscritto per poter essere coinvolto nella relazione \textit{insegnamento} deve possedere un'attributo \textit{docente} diverso dal valore NULL.
+
+    \subsubsection{Partizionamento o riaccorpamento}
+
+    Nell'ottica di ridurre gli accessi si è cercato di valutare se fosse possibile perseguire tale fine con azioni di partizionamento o riaccorpamento. L'unica osservazione in questo contesto è stata che l'entità "\textit{partita torneo}" condividesse molti dei suoi attributi con la relazione "\textit{allenamento}". Si è valutata quindi l'ipotesi di creare un'unica entità "\textit{dettagli partita"} che potesse essere messa in doppia relazione con l'entità \textit{iscritti}:
+    \begin{itemize}
+        \item una relazione di tipo ricorsivo con \textit{iscritti}, nominata "partita d'allenamento", con gli attributi necessari a descrivere le informazioni desiderate non incluse in "\textit{dettagli partita}"
+        \item la relazione già esistente "\textit{prestazione}", facendole ereditare tutti gli attributi originariamente contenuti in \textit{"Partita torneo"} che non sono comuni con l'entità "\textit{dettagli partita}".
+    \end{itemize}
+    Tale ipotesi, seppure considerata valida, è stata però messa da parte in fase di costruzione del modello logico perché considerata meno agevole nella realizzazione del database.
+
+    \subsubsection{Presentazione modello E-R ristrutturato}
+
+    A seguito delle considerazioni sopra elencate, si è rielaborato un nuovo modello entità-relazioni di seguito mostrato:
+
+    \begin{center}
+    \end{center}
+
+    \newpage
+
+    \subsection{Modello logico}
+
+    In accordo con tutte le considerazioni espresse, il modello logico formulato è il seguente:
+
+    \begin{center}
+    \end{center}
+
+    \subsection{Normalizzazione}
+
+    Il database proposto:
+    \begin{itemize}
+        \item \'E in prima forma normale: tutte le colonne sono atomiche, non sono presenti unità ripetitive
+        \item \'E in seconda forma normale: ogni tabella memorizza solamente dati relativi alla entità descritta dalla primary key. Non occorre attuare un procedimento di decomposizione.
+        \item \textbf{Non è in terza forma normale}: Esistono delle colonne che in quanto calcolate non sono dipendenti dalla sola primary key.
+    \end{itemize}
+    In particolare le colonne che fanno sì che il database non rispetti la terza forma normale sono: \textit{dettagliAllenamento.nMosse}, \textit{dettagliTorneo.nMosse}, che sono calcolabili rispettivamente dalle colonne \textit{dettagliAllenamento.mosse} ed \textit{dettagliTorneo.mosse} e l'insieme delle 4 colonne \textit{Iscritti.ELO}, \textit{partecipazioneTornei.ELOavversario}, \textit{dettagliTorneo.$\Delta$ELO} ed \textit{dettagliTorneo.risultato}. Conoscendo infatti la variazione del punteggio ELO subita da un giocatore a seguito della partecipazione ad un torneo è funzione dei punteggi ELO dei due giocatori e dell'esito dell'incontro.
+
+    Scelgo di mantenere la variabile \textit{dettagliTorneo.$\Delta$ELO} a scapito della variabile \textit{dettagliTorneo.ELOavversario} per ragioni di comodità in fase di costruzione del database (l'ELO del giocatore non iscritto all'accademia è calcolabile se mai venisse richiesto, e non ci si aspetta che accada, la variazione del punteggio invece, andrebbe calcolata in ogni caso ogni volta che si registra una partita ufficiale se non altro per aggiornare la voce \textit{ELO} della tabella \textit{Iscritti}).
+
+
+    Per completare la normalizzazione e raggiungere la terza forma normale andrebbero rimosse anche le colonne "\textit{nMosse}" (la trattazione di due casi avviene in un unico punto essendo tutte le considerazioni sovrapponibili), tuttavia nel database presentato queste sono ancora presenti. La mia scelta è dovuta da l'impossibilità riscontrata con i metodi applicabili alle stringhe di determinare con precisione il numero di mosse dalla sequenza di queste in forma algebrica (es. contando gli spazi). Essendo questa un'informazione spesso interessante da considerare, tenendo conto del principio di base del cercare di isolare la gestione dei dati dal loro utilizzo ho dunque deciso di non normalizzare completamente il database presentato alla terza forma normale.
+
+\end{document}
