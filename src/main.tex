@@ -133,7 +133,9 @@
         \midrule
         Raccoglitore & Insieme di brani che un utente può o ha già studiato & Utente, \newline Brano & \\
         \midrule
-        Studio & L'utente elebora in modo dettagliato e personale un brano al fine di riuscire a suonarlo & Battuta, \newline  Brano, \newline Utente & Stato \\
+        Studio & L'utente elebora in modo dettagliato e personale un brano al fine di riuscire a suonarlo & Brano, \newline Utente & \\
+        \midrule
+        Appartenenza & Una battuta fa parte di un insieme di battute, il cosidetto brano & Brano, \newline Battuta & \\
         \midrule
         Esempio & Rappresentazione artistica di un interprete del brano, utile per comprendere al meglio quest'ultimo & Brano, \newline URL & \\
         \midrule
@@ -161,9 +163,8 @@
         \item L'anno di nascita dell'autore non può essere maggiore dell'anno attuale
         \item L'anno di nascita dell'utente non può essere maggiore dell'anno attuale
         \item L'utente non può avere più di 120 anni
-        \item Il range del movimento non può includere anni futuri
+        \item Il range del movimento non può avere un termine definito in anni futuri
         \item Gli eventi devono essersi svolti nel passato
-        \item Non possono essere presenti battute se non è iniziato lo studio
     \end{itemize}
 
     \section{PROGGETTAZIONE LOGICA}
@@ -204,6 +205,8 @@
             Influenza & Relazione & 200\\
             \midrule
             Evento &  Entità & 200\\
+            \midrule
+            Appartenenza & Relazione & 250000\\
             \bottomrule
         \end{tabular}
     \end{center}
@@ -227,14 +230,25 @@
             \midrule
             Prelevare informazioni sul brano e sull'autore & Interattiva & 10/mese\\
             \midrule
-            Ordinare i brani di ogni utente in base al maggior numero di battute studiate & Batch & 200/giorno\\
+            Prelevare informazioni sulle battute di un brano di un utente & Interattiva & 10/giorno\\
+            \midrule
+            Preleva i brani di ogni utente ordinati in base al maggior numero di battute studiate & Batch & 200/giorno\\
             \bottomrule
         \end{tabular}
     \end{center}
 
-    \subsection{Ristrutturazione modello E-R}
+    \subsection{Analisi delle rindondanze}
 
-    \subsubsection{Eliminazione delle generalizzazioni}
+    Si osserva che è presente una rindondanza dovuta ad un ciclo che coinvolge le entità Utente, Brano, Battuta e le relazioni Studio, Appartenenza, Raccoglitore.\\
+    Si decide di andare a vedere se eliminare la relazione Raccoglitore possa influire in maniera positiva sul numero di accessi. Si vanno quindi a studiare le operazioni che coinvolgono tale relazione.\\
+
+    \subsubsection{Prelevare informazioni sulle battute di un brano di un utente}
+
+    \subsubsection{Preleva i brani di ogni utente ordinati in base al maggior numero di battute studiate}
+
+    \subsubsection{Aggiunta battuta}
+
+    \subsection{Eliminazione delle generalizzazioni}
 
     Nel diagramma entità-relazioni proposto ci sono due casi di generalizzazioni. In entrambi i casi la soluzione più ragionevole è l'accorpamento delle entità figlie in quella padre.
     \newline Si aggiungono quindi all'entità \textit{iscritti} 3 nuovi valori: "\textit{ELO}", "\textit{Titolo}" e "\textit{Docente}". Questi attributi possono assumere valore "NULL", e questo ha un preciso significato. In particolare:

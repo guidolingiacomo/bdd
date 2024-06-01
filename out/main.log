@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.5.18)  31 MAY 2024 11:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.5.18)  1 JUN 2024 18:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -415,54 +415,63 @@ Underfull \hbox (badness 10000) in paragraph at lines 116--116
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 138--138
+Underfull \hbox (badness 1418) in paragraph at lines 138--138
+\OT1/cmr/m/n/10 sieme di bat-tute, il cosidetto
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--140
 []|\OT1/cmr/m/n/10 Rappresentazione ar-tis-tica di
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 138--138
+Underfull \hbox (badness 10000) in paragraph at lines 140--140
 \OT1/cmr/m/n/10 per com-pren-dere al meglio
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 142--142
+Underfull \hbox (badness 10000) in paragraph at lines 144--144
 \OT1/cmr/m/n/10 rig-u-radanti l'interpretazione
  []
 
 
-Underfull \hbox (badness 1762) in paragraph at lines 144--144
+Underfull \hbox (badness 1762) in paragraph at lines 146--146
 []|\OT1/cmr/m/n/10 Un movi-mento artis-tico viene
  []
 
 [4] [5]
-<immagini/01_diagrammaER.png, id=22, 1015.795pt x 828.09375pt>
+<immagini/01_diagrammaER.png, id=22, 1023.825pt x 826.08624pt>
 File: immagini/01_diagrammaER.png Graphic file (type png)
 <use immagini/01_diagrammaER.png>
-Package pdftex.def Info: immagini/01_diagrammaER.png  used on input line 155.
-(pdftex.def)             Requested size: 430.00462pt x 350.53894pt.
- [6 <./immagini/01_diagrammaER.png>] [7] [8] [9]
-(/home/linux/ide/IDEAProject/Guidolin_Giacomo_BDD/out/main.aux) ) 
+Package pdftex.def Info: immagini/01_diagrammaER.png  used on input line 157.
+(pdftex.def)             Requested size: 430.00462pt x 346.95384pt.
+ [6 <./immagini/01_diagrammaER.png>] [7]
+Underfull \hbox (badness 10000) in paragraph at lines 242--244
+
+ []
+
+[8] [9] [10] (/home/linux/ide/IDEAProject/Guidolin_Giacomo_BDD/out/main.aux) ) 
 Here is how much of TeX's memory you used:
  3492 strings out of 480247
  57071 string characters out of 5896151
- 361318 words of memory out of 5000000
+ 362320 words of memory out of 5000000
  21411 multiletter control sequences out of 15000+600000
  472766 words of font info for 41 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  55i,9n,62p,802b,225s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/linux/
-.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmti10.pfb>
+ 
+</home/linux/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 Output written on /home/linux/ide/IDEAProject/Guidolin_Giacomo_BDD/out/main.pdf
- (9 pages, 156104 bytes).
+ (10 pages, 158062 bytes).
 PDF statistics:
- 72 PDF objects out of 1000 (max. 8388607)
- 45 compressed objects within 1 object stream
+ 75 PDF objects out of 1000 (max. 8388607)
+ 47 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
