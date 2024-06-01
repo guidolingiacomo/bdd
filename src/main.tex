@@ -109,11 +109,9 @@
         \midrule
         Utente & Il musicista che usufruisce della base di dati. & ID, \newline Nome, \newline Nascita, \newline Inizio & ID \\
         \midrule
-        Brano & Parte più o meno estesa di una composizione musicale. & Nome, \newline Editore, \newline Anno, \newline Copia, \newline Commento, \newline ID & ID \\
+        Brano & Parte più o meno estesa di una composizione musicale. & Nome, \newline Editore, \newline Anno, \newline Copia, \newline Commento, \newline ID, \newline URL & ID \\
         \midrule
-        Battuta & Unità di tempo rappresentata sulla partitura tramite uno spazio compreso tra due stanghette & ID, \newline Numero, \newline Btm, \newline Commento & ID \\
-        \midrule
-        Url & Link riguradante un video youtube relativo al brano & ID, \newline Brano, \newline Link & ID \\
+        Battuta & Unità di tempo rappresentata sulla partitura tramite uno spazio compreso tra due stanghette & Numero, \newline Btm, \newline Commento & Numero, \newline Appartenenza \\
         \midrule
         Autore & Colui che ha prodotto un opera artistica & Nascita, \newline Morte, \newline Commento,  \newline Nome, \newline ID & ID \\
         \midrule
@@ -136,8 +134,6 @@
         Studio & L'utente elebora in modo dettagliato e personale un brano al fine di riuscire a suonarlo & Brano, \newline Utente & \\
         \midrule
         Appartenenza & Una battuta fa parte di un insieme di battute, il cosidetto brano & Brano, \newline Battuta & \\
-        \midrule
-        Esempio & Rappresentazione artistica di un interprete del brano, utile per comprendere al meglio quest'ultimo & Brano, \newline URL & \\
         \midrule
         Compositore & Artista che produce un opera musicale & Brano, \newline Autore & \\
         \midrule
@@ -189,10 +185,6 @@
             Studio & Relazione & 250000\\
             \midrule
             Battuta &  Entità & 250000\\
-            \midrule
-            Esempio & Relazione & 750\\
-            \midrule
-            Url &  Entità & 750\\
             \midrule
             Compositore & Relazione & 500\\
             \midrule
@@ -407,23 +399,63 @@
 
     Non sono presenti generalizzazioni da poter eliminare.\\
 
-    \subsubsection{Partizionamento o riaccorpamento}
+    \subsection{Analisi degli attributi multivalore}
 
-    Nell'ottica di ridurre gli accessi si è cercato di valutare se fosse possibile perseguire tale fine con azioni di partizionamento o riaccorpamento. L'unica osservazione in questo contesto è stata che l'entità "\textit{partita torneo}" condividesse molti dei suoi attributi con la relazione "\textit{allenamento}". Si è valutata quindi l'ipotesi di creare un'unica entità "\textit{dettagli partita"} che potesse essere messa in doppia relazione con l'entità \textit{iscritti}:
-    \begin{itemize}
-        \item una relazione di tipo ricorsivo con \textit{iscritti}, nominata "partita d'allenamento", con gli attributi necessari a descrivere le informazioni desiderate non incluse in "\textit{dettagli partita}"
-        \item la relazione già esistente "\textit{prestazione}", facendole ereditare tutti gli attributi originariamente contenuti in \textit{"Partita torneo"} che non sono comuni con l'entità "\textit{dettagli partita}".
-    \end{itemize}
-    Tale ipotesi, seppure considerata valida, è stata però messa da parte in fase di costruzione del modello logico perché considerata meno agevole nella realizzazione del database.
+    Si può notare la presenza di un attributo multivalore nell'entità Brano, andiamo quindi a eliminarlo aggiungendo l'entità URL.
 
-    \subsubsection{Presentazione modello E-R ristrutturato}
+    \subsection{Presentazione modello E-R ristrutturato}
 
     A seguito delle considerazioni sopra elencate, si è rielaborato un nuovo modello entità-relazioni di seguito mostrato:
 
     \begin{center}
+        \includegraphics[width=\linewidth]{immagini/02_diagrammaER.png}
+
     \end{center}
 
-    \newpage
+    \subsection{Scelta degli identificatori primari}
+
+    Come identificatori primari sono stati scelti:
+    \begin{center}
+        \begin{tabular}{ p {5cm} ll}
+            \toprule
+            \textbf{\textit{Chiave primaria}} & \textbf{\textit{Attributo}}\\
+            \midrule
+            Strumento & ID\\
+            \midrule
+            Utente & ID\\
+            \midrule
+            Battuta & Numero e Brano (identificatore esterno)\\
+            \midrule
+            Brano & ID\\
+            \midrule
+            URL & ID\\
+            \midrule
+            Autore & ID\\
+            \midrule
+            Movimento & Nome\\
+            \midrule
+            Evento & Nome\\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+
+    \subsection{Passaggio al modello relazionale}
+
+    Si individuano le seguenti relazioni, identificatori e attributi per lo schema logico con il
+    modello relazionale:
+
+    \begin{itemize}
+        \item Strumento(\underline{ID}, Produttore, Tipo, Utente);
+        \item Utente(\underline{ID}, Nome, Nascita, Inizio);
+        \item Battuta(\underline{Numero}, \underline{Brano}, BTM, Commento, Utente);
+        \item Brano(\underline{ID}, Nome, Editore, Anno, Copia, Commento, Autore);
+        \item URL(\underline{ID}, Link, Brano);
+        \item Autore(\underline{ID}, Nascita, Morte, Commento, Nome);
+        \item Stile(\underline{Autore}, \underline{Movimento});
+        \item Movimento(\underline{Nome}, Caratteristiche, Range);
+        \item Influenza(\underline{Movimento}, \underline{Evento});
+        \item Evento(\underline{Nome}, Anno).
+    \end{itemize}
 
     \subsection{Modello logico}
 
