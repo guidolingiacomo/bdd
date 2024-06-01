@@ -244,21 +244,168 @@
 
     \subsubsection{Prelevare informazioni sulle battute di un brano di un utente}
 
+    \begin{center}
+        \begin{tabular}{ p {5cm} llll}
+            \toprule
+            \multicolumn{4}{l}{\textbf{Presenza di rindondanza}}\\
+            \midrule
+            \midrule
+            \textbf{\textit{Concetto}} & \textbf{\textit{Costrutto}} & \textbf{\textit{Accessi}} & \textbf{\textit{Tipo}}\\
+            \midrule
+            Battuta & E & 500 & L\\
+            \midrule
+            Brano & E & 1 & L\\
+            \midrule
+            Utente & E & 1 & L\\
+            \midrule
+            Studio & R & 500 & L\\
+            \midrule
+            Appartenenza & R & 500 & L\\
+            \midrule
+            Raccoglitore & R & 1 & L\\
+            \midrule
+            \midrule
+            \textit{Accessi totali:} & & & 1503\\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+
+    \begin{center}
+        \begin{tabular}{ p {5cm} llll}
+            \toprule
+            \multicolumn{4}{l}{\textbf{Assenza di rindondanza}}\\
+            \midrule
+            \midrule
+            \textbf{\textit{Concetto}} & \textbf{\textit{Costrutto}} & \textbf{\textit{Accessi}} & \textbf{\textit{Tipo}}\\
+            \midrule
+            Battuta & E & 500 & L\\
+            \midrule
+            Brano & E & 1 & L\\
+            \midrule
+            Utente & E & 1 & L\\
+            \midrule
+            Studio & R & 500 & L\\
+            \midrule
+            Appartenenza & R & 500 & L\\
+            \midrule
+            \midrule
+            \textit{Accessi totali:} & & & 1502\\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+
     \subsubsection{Preleva i brani di ogni utente ordinati in base al maggior numero di battute studiate}
+
+    \begin{center}
+        \begin{tabular}{ p {5cm} llll}
+            \toprule
+            \multicolumn{4}{l}{\textbf{Presenza di rindondanza}}\\
+            \midrule
+            \midrule
+            \textbf{\textit{Concetto}} & \textbf{\textit{Costrutto}} & \textbf{\textit{Accessi}} & \textbf{\textit{Tipo}}\\
+            \midrule
+            Battuta & E & 2500 & L\\
+            \midrule
+            Brano & E & 5 & L\\
+            \midrule
+            Utente & E & 1 & L\\
+            \midrule
+            Studio & R & 2500 & L\\
+            \midrule
+            Appartenenza & R & 2500 & L\\
+            \midrule
+            Raccoglitore & R & 5 & L\\
+            \midrule
+            \midrule
+            \textit{Accessi totali:} & & & 7511\\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+
+    \begin{center}
+        \begin{tabular}{ p {5cm} llll}
+            \toprule
+            \multicolumn{4}{l}{\textbf{Presenza di rindondanza}}\\
+            \midrule
+            \midrule
+            \textbf{\textit{Concetto}} & \textbf{\textit{Costrutto}} & \textbf{\textit{Accessi}} & \textbf{\textit{Tipo}}\\
+            \midrule
+            Battuta & E & 2500 & L\\
+            \midrule
+            Brano & E & 5 & L\\
+            \midrule
+            Utente & E & 1 & L\\
+            \midrule
+            Studio & R & 2500 & L\\
+            \midrule
+            Appartenenza & R & 2500 & L\\
+            \midrule
+            \midrule
+            \textit{Accessi totali:} & & & 7506\\
+            \bottomrule
+        \end{tabular}
+    \end{center}
 
     \subsubsection{Aggiunta battuta}
 
+    \begin{center}
+        \begin{tabular}{ p {5cm} llll}
+            \toprule
+            \multicolumn{4}{l}{\textbf{Presenza di rindondanza}}\\
+            \midrule
+            \midrule
+            \textbf{\textit{Concetto}} & \textbf{\textit{Costrutto}} & \textbf{\textit{Accessi}} & \textbf{\textit{Tipo}}\\
+            \midrule
+            Battuta & E & 1 & S\\
+            \midrule
+            Brano & E & 1 & L\\
+            \midrule
+            Utente & E & 1 & L\\
+            \midrule
+            Studio & R & 1 & S\\
+            \midrule
+            Appartenenza & R & 1 & S\\
+            \midrule
+            Raccoglitore & R & 1 & L\\
+            \midrule
+            \midrule
+            \textit{Accessi totali:} & & & 9\\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+
+    \begin{center}
+        \begin{tabular}{ p {5cm} llll}
+            \toprule
+            \multicolumn{4}{l}{\textbf{Presenza di rindondanza}}\\
+            \midrule
+            \midrule
+            \textbf{\textit{Concetto}} & \textbf{\textit{Costrutto}} & \textbf{\textit{Accessi}} & \textbf{\textit{Tipo}}\\
+            \midrule
+            Battuta & E & 1 & S\\
+            \midrule
+            Brano & E & 1 & L\\
+            \midrule
+            Utente & E & 1 & L\\
+            \midrule
+            Studio & R & 1 & S\\
+            \midrule
+            Appartenenza & R & 1 & S\\
+            \midrule
+            \midrule
+            \textit{Accessi totali:} & & & 8\\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+
+    \subsubsection{Analisi convenienza}
+
+    Tenendo conto del numero di accessi al giorno si ottiene un miglioramento di 1210 accessi totali. Anche se non risulta essere una differenza elevata si decide di eliminare la rindondanza, ipotizzando un futuro accrescimento del database che
+    aumenterebbe la dimensione del sopracitato miglioramento.\\
+
     \subsection{Eliminazione delle generalizzazioni}
 
-    Nel diagramma entità-relazioni proposto ci sono due casi di generalizzazioni. In entrambi i casi la soluzione più ragionevole è l'accorpamento delle entità figlie in quella padre.
-    \newline Si aggiungono quindi all'entità \textit{iscritti} 3 nuovi valori: "\textit{ELO}", "\textit{Titolo}" e "\textit{Docente}". Questi attributi possono assumere valore "NULL", e questo ha un preciso significato. In particolare:
-    \newline  ELO NULL $ \Rightarrow $ Iscritto "amatore"
-    \newline  ELO NOT NULL $ \Rightarrow $ Iscritto "agonista"
-    \newline  Docente NULL $ \Rightarrow $ Iscritto "giocatore"
-    \newline  Docente NOT NULL $ \Rightarrow $ Iscritto "studente"
-
-
-    Facendo questa operazione si crea due nuovi vincoli non esprimibili dal grafico del modello E-R: un iscritto per poter essere coinvolto nella relazione \textit{prestazione} deve possedere un attributo ELO diverso dal valore NULL. Similmente un iscritto per poter essere coinvolto nella relazione \textit{insegnamento} deve possedere un'attributo \textit{docente} diverso dal valore NULL.
+    Non sono presenti generalizzazioni da poter eliminare.\\
 
     \subsubsection{Partizionamento o riaccorpamento}
 
