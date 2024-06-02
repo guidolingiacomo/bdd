@@ -32,7 +32,7 @@
     L'utente dovrà essere in grado, se desidera di ricavare informazioni sull'autore per poter al meglio interpretare il brano.\\
     Il compositore del pezzo infatti, oltre al nome, potrà avere informazioni quali la data di nascita, la eventuale data di morte e la corrente artistica cui fa parte. Se necessario sarà anche
     possibile avere una sezione commenti per poter anche qui descrivere informazioni stilistiche tipiche del dato autore.\\
-    Anche il il movimento artistico, cui fa parte l'autore, presenterà alcune info quali il nome, le caratteristiche tecniche-stilistiche che la rendono una corrente a se stante,
+    Anche il movimento artistico, cui fa parte l'autore, presenterà alcune info quali il nome, le caratteristiche tecniche-stilistiche che la rendono una corrente a se stante,
     e se necessario il range di anni su cui si sviluppò  maggiormente.
     \\Al movimento aggiungiamo anche notizie storiche, sotto forma di eventi decisivi per lo sviluppo della corrente, che potranno essere registrati tramite nome e anno di appartenenza.
     \\In ultimo richiediamo di aggiungere una lista di strumenti musicali che saranno di tipi diversi e di case produttrici differenti dei quali l'utente ne possederà almeno uno. Questo, al
@@ -131,7 +131,7 @@
         \midrule
         Raccoglitore & Insieme di brani che un utente può o ha già studiato & Utente, \newline Brano & \\
         \midrule
-        Studio & L'utente elebora in modo dettagliato e personale un brano al fine di riuscire a suonarlo & Brano, \newline Utente & \\
+        Studio & L'utente elebora in modo dettagliato e personale un brano al fine di riuscire a suonarlo & Battuta, \newline Utente & \\
         \midrule
         Appartenenza & Una battuta fa parte di un insieme di battute, il cosidetto brano & Brano, \newline Battuta & \\
         \midrule
@@ -470,13 +470,10 @@
     \begin{itemize}
         \item \'E in prima forma normale: tutte le colonne sono atomiche, non sono presenti unità ripetitive
         \item \'E in seconda forma normale: ogni tabella memorizza solamente dati relativi alla entità descritta dalla primary key. Non occorre attuare un procedimento di decomposizione.
-        \item \textbf{Non è in terza forma normale}: Esistono delle colonne che in quanto calcolate non sono dipendenti dalla sola primary key.
+        \item \textbf{Non è in terza forma normale}: Si può discutere sulla dipendenza della colonna Copia dalle colonne Nome, Editore e Anno.
     \end{itemize}
-    In particolare le colonne che fanno sì che il database non rispetti la terza forma normale sono: \textit{dettagliAllenamento.nMosse}, \textit{dettagliTorneo.nMosse}, che sono calcolabili rispettivamente dalle colonne \textit{dettagliAllenamento.mosse} ed \textit{dettagliTorneo.mosse} e l'insieme delle 4 colonne \textit{Iscritti.ELO}, \textit{partecipazioneTornei.ELOavversario}, \textit{dettagliTorneo.$\Delta$ELO} ed \textit{dettagliTorneo.risultato}. Conoscendo infatti la variazione del punteggio ELO subita da un giocatore a seguito della partecipazione ad un torneo è funzione dei punteggi ELO dei due giocatori e dell'esito dell'incontro.
 
-    Scelgo di mantenere la variabile \textit{dettagliTorneo.$\Delta$ELO} a scapito della variabile \textit{dettagliTorneo.ELOavversario} per ragioni di comodità in fase di costruzione del database (l'ELO del giocatore non iscritto all'accademia è calcolabile se mai venisse richiesto, e non ci si aspetta che accada, la variazione del punteggio invece, andrebbe calcolata in ogni caso ogni volta che si registra una partita ufficiale se non altro per aggiornare la voce \textit{ELO} della tabella \textit{Iscritti}).
-
-
-    Per completare la normalizzazione e raggiungere la terza forma normale andrebbero rimosse anche le colonne "\textit{nMosse}" (la trattazione di due casi avviene in un unico punto essendo tutte le considerazioni sovrapponibili), tuttavia nel database presentato queste sono ancora presenti. La mia scelta è dovuta da l'impossibilità riscontrata con i metodi applicabili alle stringhe di determinare con precisione il numero di mosse dalla sequenza di queste in forma algebrica (es. contando gli spazi). Essendo questa un'informazione spesso interessante da considerare, tenendo conto del principio di base del cercare di isolare la gestione dei dati dal loro utilizzo ho dunque deciso di non normalizzare completamente il database presentato alla terza forma normale.
+    Si sceglie di non completare la normalizzazione e di lasciare stare la terza forma normale. Tentare di eliminare la denormalizzazione risulterebbe un lavoro inultile, perchè per definizione
+    del database non risulterà mai necessario modificare le colonne Nome, Editore e Anno, poichè lo studio di un brano risulterà collegato strettamente all'edizione utilizzata.
 
 \end{document}
