@@ -629,7 +629,7 @@
     \begin{verbatim}
         DELIMITER $$
 
-        CREATE PROCEDURE AggiornaBattuta(
+        CREATE PROCEDURE updateBattuta(
             IN selectedNumero INT,
             IN BranoID INT,
             IN newBTM INT,
@@ -660,12 +660,12 @@
     \begin{verbatim}
         DELIMITER $$
 
-        CREATE PROCEDURE RicavaInformazioniBrano(
+        CREATE PROCEDURE getInformazioniStilistiche(
             IN BranoID INT
         )
         BEGIN
 
-            --Dichiara una variabile AutoreID e ci assegna l'ID dell'autore associato al brano
+            -- Dichiara una variabile AutoreID e ci assegna l'ID dell'autore associato al brano
             DECLARE AutoreID INT;
 
             SELECT Autore.ID
@@ -690,7 +690,7 @@
             FROM Autore
             WHERE Autore.ID = AutoreID;
 
-            -- Ricava le informazioni relative ai movimenti associati all'autore del brano
+            -- Ricava le informazioni relative ai movimenti associati all'autore
             SELECT Movimento.Nome, Movimento.Caratteristiche, Movimento.`Range`
             FROM Autore
             INNER JOIN Stile
@@ -699,7 +699,7 @@
             ON Movimento.Nome = Stile.Movimento
             WHERE Autore.ID = AutoreID;
 
-            -- Ricava le informazioni relative agli eventi associati ai movimenti dell'autore del brano
+            -- Ricava le informazioni relative agli eventi associati ai movimenti
             SELECT Evento.Nome AS EventoNome, Evento.Anno AS EventoAnno
             FROM Autore
             INNER JOIN Stile
@@ -711,7 +711,69 @@
             INNER JOIN Evento
             ON Evento.Nome = Influenza.Evento
             WHERE Autore.ID = AutoreID;
-        END &&
+        END $$
+
+        DELIMITER ;
+    \end{verbatim}
+    
+    \subsection{Prelevare informazioni sul brano
+    e sull’autore}
+    
+    \begin{verbatim}
+        DELIMITER $$
+
+        CREATE PROCEDURE getInformazioniEditoriali(
+            IN BranoID INT
+        )
+        BEGIN
+            -- Ricava il nome, l'editore, l'anno e la copia del brano
+            SELECT
+                Brano.Nome AS NomeBrano,
+                Brano.Editore,
+                Brano.Anno,
+                Brano.Copia
+            FROM
+                Brano
+            WHERE
+                Brano.ID = BranoID;
+
+            -- Ricava il nome dell'autore, la sua data di nascita e di morte associato al brano
+            SELECT
+                Autore.Nome AS NomeAutore,
+                Autore.Nascita,
+                Autore.Morte
+            FROM
+                Brano
+            INNER JOIN
+                Autore ON Brano.Autore = Autore.ID
+            WHERE
+                Brano.ID = BranoID;
+        END $$
+
+        DELIMITER ;
+    \end{verbatim}
+    
+    \subsection{Prelevare informazioni sulle battute di un brano di un utente}
+    
+    \begin{verbatim}
+        DELIMITER $$
+
+        CREATE PROCEDURE getInformazioniBattute(
+            IN BranoID INT,
+            IN UtenteID INT
+        )
+        BEGIN
+            -- Ricava tutte le informazioni delle battute associate
+            SELECT
+                Battuta.Numero,
+                Battuta.BTM,
+                Battuta.Commento
+            FROM
+                Battuta
+            WHERE
+                Battuta.Brano = BranoID
+                AND Battuta.Utente = UtenteID;
+        END $$
 
         DELIMITER ;
     \end{verbatim}
