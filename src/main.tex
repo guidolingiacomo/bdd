@@ -623,6 +623,27 @@
 
         DELIMITER ;
     \end{verbatim}
+
+    \subsection{Aggiunta battuta}
+
+    \begin{verbatim}
+        DELIMITER $$
+
+        CREATE PROCEDURE addBattuta(
+            IN newNumero INT,
+            IN BranoID INT,
+            IN newBTM INT,
+            IN newCommento TEXT,
+            IN UtenteID INT
+        )
+        BEGIN
+            -- Inserisce una nuova battuta nella tabella Battuta
+            INSERT INTO Battuta (Numero, Brano, BTM, Commento, Utente)
+            VALUES (newNumero, BranoID, newBTM, newCommento, UtenteID);
+        END $$
+
+        DELIMITER ;
+    \end{verbatim}
     
     \subsection{Aggiornamento battuta}
     
@@ -732,22 +753,17 @@
                 Brano.Editore,
                 Brano.Anno,
                 Brano.Copia
-            FROM
-                Brano
-            WHERE
-                Brano.ID = BranoID;
+            FROM Brano
+            WHEREn Brano.ID = BranoID;
 
             -- Ricava il nome dell'autore, la sua data di nascita e di morte associato al brano
             SELECT
                 Autore.Nome AS NomeAutore,
                 Autore.Nascita,
                 Autore.Morte
-            FROM
-                Brano
-            INNER JOIN
-                Autore ON Brano.Autore = Autore.ID
-            WHERE
-                Brano.ID = BranoID;
+            FROM Brano
+            INNER JOIN Autore ON Brano.Autore = Autore.ID
+            WHERE Brano.ID = BranoID;
         END $$
 
         DELIMITER ;
@@ -768,11 +784,36 @@
                 Battuta.Numero,
                 Battuta.BTM,
                 Battuta.Commento
-            FROM
-                Battuta
-            WHERE
-                Battuta.Brano = BranoID
-                AND Battuta.Utente = UtenteID;
+            FROM Battuta
+            WHERE Battuta.Brano = BranoID AND Battuta.Utente = UtenteID;
+        END $$
+
+        DELIMITER ;
+    \end{verbatim}
+    
+    \subsection{Preleva i brani di ogni utente or-
+    dinati in base al maggior numero
+    di battute studiate}
+
+    \begin{verbatim}
+        -- Da ripetere per ogni utente se si vuole averne informazioni su più di uno
+
+        DELIMITER $$
+
+        CREATE PROCEDURE getBrani(
+            IN UtenteID INT
+        )
+        BEGIN
+            -- Selezione dei brani dell'utente ordinati
+            SELECT
+                Brano.ID,
+                Brano.Nome,
+                COUNT(Battuta.ID) AS NumBattute
+            FROM Brano
+            INNER JOIN Battuta ON Brano.ID = Battuta.Brano
+            WHERE Battuta.Utente = UtenteID
+            GROUP BY Brano.ID
+            ORDER BY NumBattute DESC;
         END $$
 
         DELIMITER ;
