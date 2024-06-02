@@ -599,7 +599,6 @@
         END $$
 
         DELIMITER ;
-
     \end{verbatim}
     
     \subsection{Aggiunta brano}
@@ -818,5 +817,27 @@
 
         DELIMITER ;
     \end{verbatim}
+    
+    \section{Realizzazione Trigger}
+    
+    \subsection{L’anno di nascita dell’autore non può essere maggiore dell’anno attuale}
+    
+    \begin{verbatim}
+        DELIMITER $$
+
+        CREATE TRIGGER VerificaAnnoNascitaAutore
+        BEFORE INSERT ON Autore
+        FOR EACH ROW
+        BEGIN
+            IF NEW.Nascita > CURDATE() THEN
+                SIGNAL SQLSTATE '45000'
+                SET MESSAGE_TEXT = 'L\'anno di nascita non può essere maggiore dell\'anno attuale.';
+            END IF;
+        END $$
+
+        DELIMITER ;
+    \end{verbatim}
+    
+    \subsection{}
 
 \end{document}
