@@ -159,7 +159,6 @@
         \item L'anno di nascita dell'autore non può essere maggiore dell'anno attuale
         \item L'anno di nascita dell'utente non può essere maggiore dell'anno attuale
         \item L'utente non può avere più di 120 anni
-        \item Il range del movimento non può avere un termine definito in anni futuri
         \item Gli eventi devono essersi svolti nel passato
     \end{itemize}
 
@@ -848,8 +847,48 @@
         FOR EACH ROW
         BEGIN
             IF NEW.Nascita > CURDATE() THEN
+               SIGNAL SQLSTATE '45000'
+               SET MESSAGE_TEXT = 'L\'anno di nascita non può essere maggiore dell\'anno attuale.';
+            END IF;
+        END $$
+
+        DELIMITER ;
+    \end{verbatim}
+    
+    \subsection{L’utente non può avere più di 120 anni}
+    
+    \begin{verbatim}
+        DELIMITER $$
+        
+        CREATE TRIGGER VerificaEtaUtente
+        BEFORE INSERT ON Utente
+        FOR EACH ROW
+        BEGIN
+            DECLARE eta INT;
+            SET eta = YEAR(CURDATE()) - YEAR(NEW.Nascita);
+
+            IF eta > 120 THEN
                 SIGNAL SQLSTATE '45000'
-                SET MESSAGE_TEXT = 'L\'anno di nascita non può essere maggiore dell\'anno attuale.';
+                SET MESSAGE_TEXT = 'L\'utente non può avere più di 120 anni.';
+            END IF;
+        END $$
+
+        DELIMITER ;
+
+    \end{verbatim}
+    
+    \subsection{Gli eventi devono essersi svolti nel passato}
+
+    \begin{verbatim}
+        DELIMITER $$
+
+        CREATE TRIGGER VerificaDataEvento
+        BEFORE INSERT ON Evento
+        FOR EACH ROW
+        BEGIN
+            IF NEW.Anno > YEAR(CURDATE()) THEN
+                SIGNAL SQLSTATE '45000'
+                SET MESSAGE_TEXT = 'L\'evento non può avere una data nel futuro.';
             END IF;
         END $$
 
