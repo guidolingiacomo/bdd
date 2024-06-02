@@ -476,7 +476,7 @@
     Si sceglie di non completare la normalizzazione e di lasciare stare la terza forma normale. Tentare di eliminare la denormalizzazione risulterebbe un lavoro inultile, perchè per definizione
     del database non risulterà mai necessario modificare le colonne Nome, Editore e Anno, poichè lo studio di un brano risulterà collegato strettamente all'edizione utilizzata.
 
-    \section{Realizzazione ottimizzazioni}
+    \section{Realizzazione operazioni}
 
     \subsection{Create da eliminare}
 
@@ -625,5 +625,95 @@
     \end{verbatim}
     
     \subsection{Aggiornamento battuta}
+    
+    \begin{verbatim}
+        DELIMITER $$
+
+        CREATE PROCEDURE AggiornaBattuta(
+            IN selectedNumero INT,
+            IN BranoID INT,
+            IN newBTM INT,
+            IN newCommento TEXT
+        )
+        BEGIN
+            -- Aggiorna il campo BTM se il nuovo valore non è NULL
+            IF newBTM IS NOT NULL THEN
+                UPDATE Battuta
+                SET BTM = newBTM
+                WHERE Numero = selectedNumero AND Brano = BranoID;
+            END IF;
+
+            -- Aggiorna il campo Commento se il nuovo valore non è NULL
+            IF newCommento IS NOT NULL THEN
+                UPDATE Battuta
+                SET Commento = newCommento
+                WHERE Numero = selectedNumero AND Brano = BranoID;
+            END IF;
+        END $$
+
+        DELIMITER ;
+    \end{verbatim}
+    
+    \subsection{Prelevare informazioni tecnico-
+    stilistiche sul brano}
+    
+    \begin{verbatim}
+        DELIMITER $$
+
+        CREATE PROCEDURE RicavaInformazioniBrano(
+            IN BranoID INT
+        )
+        BEGIN
+
+            --Dichiara una variabile AutoreID e ci assegna l'ID dell'autore associato al brano
+            DECLARE AutoreID INT;
+
+            SELECT Autore.ID
+            INTO AutoreID
+            FROM Brano
+            INNER JOIN Autore
+            ON Brano.Autore = Autore.ID
+            WHERE Brano.ID = BranoID;
+
+            -- Ricava gli URL associati al brano
+            SELECT URL.Link
+            FROM URL
+            WHERE URL.Brano = BranoID;
+
+            -- Ricava il commento del brano
+            SELECT Brano.Commento AS BranoCommento
+            FROM Brano
+            WHERE Brano.ID = BranoID;
+
+            -- Ricava il commento dell'autore del brano
+            SELECT Autore.Commento AS AutoreCommento
+            FROM Autore
+            WHERE Autore.ID = AutoreID;
+
+            -- Ricava le informazioni relative ai movimenti associati all'autore del brano
+            SELECT Movimento.Nome, Movimento.Caratteristiche, Movimento.`Range`
+            FROM Autore
+            INNER JOIN Stile
+            ON Autore.ID = Stile.Autore
+            INNER JOIN Movimento
+            ON Movimento.Nome = Stile.Movimento
+            WHERE Autore.ID = AutoreID;
+
+            -- Ricava le informazioni relative agli eventi associati ai movimenti dell'autore del brano
+            SELECT Evento.Nome AS EventoNome, Evento.Anno AS EventoAnno
+            FROM Autore
+            INNER JOIN Stile
+            ON Autore.ID = Stile.Autore
+            INNER JOIN Movimento
+            ON Movimento.Nome = Stile.Movimento
+            INNER JOIN Influenza
+            ON Movimento.Nome = Influenza.Movimento
+            INNER JOIN Evento
+            ON Evento.Nome = Influenza.Evento
+            WHERE Autore.ID = AutoreID;
+        END &&
+
+        DELIMITER ;
+    \end{verbatim}
 
 \end{document}
