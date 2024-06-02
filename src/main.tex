@@ -476,4 +476,154 @@
     Si sceglie di non completare la normalizzazione e di lasciare stare la terza forma normale. Tentare di eliminare la denormalizzazione risulterebbe un lavoro inultile, perchè per definizione
     del database non risulterà mai necessario modificare le colonne Nome, Editore e Anno, poichè lo studio di un brano risulterà collegato strettamente all'edizione utilizzata.
 
+    \section{Realizzazione ottimizzazioni}
+
+    \subsection{Create da eliminare}
+
+    \begin{verbatim}
+        CREATE DATABASE musica;
+
+        USE musica;
+
+        CREATE TABLE Utente (
+                                ID INT AUTO_INCREMENT PRIMARY KEY,
+                                Nome VARCHAR(50) NOT NULL,
+                                Nascita DATE NOT NULL ,
+                                Inizio DATE NOT NULL
+        );
+
+        CREATE TABLE Autore (
+                                ID INT AUTO_INCREMENT PRIMARY KEY,
+                                Nome VARCHAR(50) NOT NULL,
+                                Nascita DATE,
+                                Morte DATE,
+                                Commento TEXT
+        );
+
+        CREATE TABLE Brano (
+                               ID INT AUTO_INCREMENT PRIMARY KEY,
+                               Nome VARCHAR(100) NOT NULL,
+                               Editore VARCHAR(100),
+                               Anno INT,
+                               Copia INT,
+                               Commento TEXT,
+                               Autore INT,
+                               FOREIGN KEY (Autore) REFERENCES Autore(ID)
+        );
+
+        CREATE TABLE Strumento (
+                           ID INT AUTO_INCREMENT PRIMARY KEY,
+                           Produttore VARCHAR(50) NOT NULL ,
+                           Tipo VARCHAR(50) NOT NULL ,
+                           Utente INT,
+                           FOREIGN KEY (Utente) REFERENCES Utente(ID)
+        );
+
+
+        CREATE TABLE Battuta (
+                                 Numero INT,
+                                 Brano INT,
+                                 BTM INT,
+                                 Commento TEXT,
+                                 Utente INT,
+                                 PRIMARY KEY (Numero, Brano),
+                                 FOREIGN KEY (Brano) REFERENCES Brano(ID),
+                                 FOREIGN KEY (Utente) REFERENCES Utente(ID)
+        );
+
+        CREATE TABLE URL (
+                             ID INT AUTO_INCREMENT PRIMARY KEY,
+                             Link TEXT NOT NULL ,
+                             Brano INT,
+                             FOREIGN KEY (Brano) REFERENCES Brano(ID)
+        );
+
+        CREATE TABLE Movimento (
+                                   Nome VARCHAR(50) PRIMARY KEY,
+                                   Caratteristiche TEXT NOT NULL,
+                                   'Range' VARCHAR(50)
+        );
+
+        CREATE TABLE Stile (
+                               Autore INT,
+                               Movimento VARCHAR(50),
+                               PRIMARY KEY (Autore, Movimento),
+                               FOREIGN KEY (Autore) REFERENCES Autore(ID),
+                               FOREIGN KEY (Movimento) REFERENCES Movimento(Nome)
+        );
+
+        CREATE TABLE Evento (
+                                Nome VARCHAR(100) PRIMARY KEY,
+                                Anno INT NOT NULL
+        );
+
+        CREATE TABLE Influenza (
+                           Movimento VARCHAR(50),
+                           Evento VARCHAR(100),
+                           PRIMARY KEY (Movimento, Evento),
+                           FOREIGN KEY (Movimento) REFERENCES Movimento(Nome),
+                           FOREIGN KEY (Evento) REFERENCES Evento(Nome)
+        );
+
+
+
+    \end{verbatim}
+    
+    \subsection{Aggiunta utente}
+    
+    \begin{verbatim}
+        DELIMITER $$
+
+        CREATE PROCEDURE addUtente(
+            IN newNome VARCHAR(50),
+            IN newNascita DATE,
+            IN newInizio DATE,
+            IN StrumentoID INT
+        )
+        BEGIN
+            -- Variabile per memorizzare l'ID del nuovo utente
+            DECLARE UtenteID INT;
+
+            -- Inserisce il nuovo utente nella tabella Utente
+            INSERT INTO Utente (Nome, Nascita, Inizio)
+            VALUES (newNome, newNascita, newInizio);
+
+            -- Ottiene l'ID dell'utente appena inserito
+            SET UtenteID = LAST_INSERT_ID();
+
+            -- Aggiorna la tabella Strumento per associare lo strumento all'utente
+            UPDATE Strumento
+            SET Utente = UtenteID
+            WHERE ID = StrumentoID;
+
+        END $$
+
+        DELIMITER ;
+
+    \end{verbatim}
+    
+    \subsection{Aggiunta brano}
+    
+    \begin{verbatim}
+        DELIMITER $$
+
+        CREATE PROCEDURE addBrano(
+            IN newNome VARCHAR(100),
+            IN newEditore VARCHAR(100),
+            IN newAnno INT,
+            IN newCopia INT,
+            IN newCommento TEXT,
+            IN AutoreID INT
+        )
+        BEGIN
+            -- Inserisce il nuovo brano nella tabella Brano
+            INSERT INTO Brano (Nome, Editore, Anno, Copia, Commento, Autore)
+            VALUES (newNome, newEditore, newAnno, newCopia, newCommento, AutoreID);
+        END $$
+
+        DELIMITER ;
+    \end{verbatim}
+    
+    \subsection{Aggiornamento battuta}
+
 \end{document}
